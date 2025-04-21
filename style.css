@@ -1,0 +1,257 @@
+/* Reset and base styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, #1e1e2f, #000);
+  color: #fff;
+  text-align: center;
+  padding: 40px 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Game title */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #0ff;
+  text-shadow: 0 0 4px #0ff;
+  font-weight: 600;
+}
+
+/* Game container */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Board grid */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* Individual cell */
+.cell {
+  width: 100px;
+  height: 100px;
+  background: #111;
+  border: 2px solid #0ff;
+  font-size: 2.5rem;
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 12px;
+  user-select: none;
+}
+
+.cell:hover {
+  transform: scale(1.05); /* Only scale on hover, no background change */
+}
+
+/* Game status text */
+.status {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #ddd;
+  text-shadow: 0 0 5px #0ff;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Highlight the player's turn */
+.status.x-turn {
+  color: #0ff;
+  text-shadow: 0 0 4px #0ff;
+/*   background-color: rgba(0, 255, 0, 0.2); /* Soft green glow for Player X */ */
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.status.o-turn {
+  color: #0ff;
+  text-shadow: 0 0 4px #0ff;  
+/*   background-color: rgba(255, 255, 255, 1); */
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Reset Button */
+button {
+  padding: 12px 25px;
+  font-size: 1rem;
+  background-color: #0ff;
+  color: #000;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 15px #0ff;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #00e6e6;
+  transform: scale(1.05);
+}
+
+/* Custom Alert Modal */
+/* #alertModal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 30px 50px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  color: #0ff;
+  font-size: 1.5rem;
+  text-align: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease;
+}
+
+#alertModal .message {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ff0; 
+  margin-bottom: 20px;
+}
+
+#alertModal .emoji {
+  font-size: 3rem;
+}
+
+#alertModal .button {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  background-color: #0ff;
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #0ff;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#alertModal .button:hover {
+  background-color: #00e6e6;
+  transform: scale(1.05);
+} */
+/* Alert Modal */
+#alertModal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 350px;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  animation: popUp 0.5s ease-out, fadeInText 0.5s ease-in-out;
+}
+
+/* Fade-in text animation */
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Pop-up animation */
+@keyframes popUp {
+  from {
+    transform: translate(-50%, -60%) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Emoji styling */
+#alertModal .emoji {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  animation: bounceEmoji 1s ease infinite, fadeInText 0.8s ease-in-out;
+}
+
+@keyframes bounceEmoji {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Message Styling */
+#alertModal .message {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2d3436; /* Dark text color */
+  margin-bottom: 15px;
+  text-align: center;
+  line-height: 1.4;
+  opacity: 0;
+  animation: fadeInText 1s ease-in-out 0.3s forwards;
+}
+
+/* Button styling */
+#alertModal .button {
+  background-color: #00b894; /* Main button color */
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  display: block;
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  animation: fadeInText 1s ease-in-out 0.6s forwards;
+}
+
+#alertModal .button:hover {
+  background-color: #019875; /* Hover effect */
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 183, 148, 0.5); /* Glowing effect on hover */
+}
+
+#alertModal .button:active {
+  transform: scale(0.95);
+  box-shadow: none; /* Removes glow when clicked */
+}
+
+
+/* Fade-in animation for the alert */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
